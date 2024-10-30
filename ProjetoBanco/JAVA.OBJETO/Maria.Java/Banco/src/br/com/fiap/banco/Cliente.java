@@ -1,6 +1,9 @@
 package br.com.fiap.banco;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date; // BIBLIOTECA DATE 
+
 
 public class Cliente {
 
@@ -11,15 +14,23 @@ public class Cliente {
 	private String nome;
 	private String CPF;
 	private String endereco;
-	private Date dataNasc; // IMPORTAR A CRTL + SHIFT + O
+	private Date dataNasc = new Date(); // IMPORTAR A CRTL + SHIFT + O
 
 	// CONSTRUTOR
 	// ATALHO: CTRL + 3 + generate + Generate Construction...
-	public Cliente(String nome, String cPF, String endereco, Date dataNasc) {
+	public Cliente(String nome, String CPF, String endereco, String dataNasc) {
 		this.nome = nome;
-		CPF = CPF;
+		this.CPF= CPF;
 		this.endereco = endereco;
-		this.dataNasc = dataNasc;
+		
+		SimpleDateFormat format = new SimpleDateFormat ("dd/MM/yyyy"); // IMPORTAR CLASS
+		try {
+			this.dataNasc = format.parse(dataNasc);
+		} catch (ParseException e) {
+			System.err.println("Formato de data invalido: " + dataNasc);
+			e.printStackTrace();
+			
+		}
 
 		// GETTER / SETTERS
 		// CTRL + 3 + GENERATES GETTER AND SETTERS
@@ -38,7 +49,7 @@ public class Cliente {
 	}
 
 	public void setCPF(String cPF) {
-		CPF = cPF;
+		CPF = CPF;
 	}
 
 	public String getEndereco() {
